@@ -10,9 +10,9 @@
 
 ##Todo-list
 ---
--[] todo
--[] todo
--[] todo
+-[ ] todo
+-[ ] todo
+-[ ] todo
 
 ----
 ##ETC
