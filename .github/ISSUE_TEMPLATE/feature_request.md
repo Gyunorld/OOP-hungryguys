@@ -8,14 +8,15 @@
 
 ---
 
-##Todo-list
+## Todo-list
 ---
 - [ ] todo
 - [ ] todo
 - [ ] todo
 
-----
-##ETC
+---
+## ETC
+---
 기타사항
 
 ---
