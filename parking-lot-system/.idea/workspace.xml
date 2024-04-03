@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9deb00d-445c-4904-be2c-9e6d45c31282" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/parkingsystem/model/dto/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parkingsystem/model/dto/Car.java" afterDir="false" />
-    </list>
+    <list default="true" id="d9deb00d-445c-4904-be2c-9e6d45c31282" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +45,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.parking-lot-system [:Application.main()].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -68,7 +67,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
+        <option value="jdk-17.0.10-temurin-17.0.10-4caba194b151-b3785831" />
       </set>
     </attachedChunks>
   </component>
@@ -82,6 +81,7 @@
       <updated>1712134511037</updated>
       <workItem from="1712134512302" duration="78000" />
       <workItem from="1712134848142" duration="1210000" />
+      <workItem from="1712136497865" duration="657000" />
     </task>
     <servers />
   </component>

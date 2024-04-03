@@ -21,12 +21,12 @@ public class Car {
         this.carNum = carNum;
     }
 
-    public boolean getCarType() {
+    public boolean isCarisBig() {
         return carisBig;
     }
 
-    public void setCarType(boolean carType) {
-        this.carisBig = carType;
+    public void setCarisBig(boolean carisBig) {
+        this.carisBig = carisBig;
     }
 
     @Override
