@@ -9,6 +9,5 @@ public class Application {
 //        MainMenu menu = new MainMenu();
 
         ParkingLot pl = new ParkingLot(30, 10);
-        System.out.println(pl.countSpace());
     }
 }
