@@ -3,14 +3,14 @@ package parkingsystem.model.dto;
 public class Car {
 
     private int carNum;
-    private String carType;
+    private boolean carisBig;
 
     public Car() {
     }
 
-    public Car(int carNum, String carType) {
+    public Car(int carNum, boolean isBig) {
         this.carNum = carNum;
-        this.carType = carType;
+        this.carisBig = isBig;
     }
 
     public int getCarNum() {
@@ -21,19 +21,19 @@ public class Car {
         this.carNum = carNum;
     }
 
-    public String getCarType() {
-        return carType;
+    public boolean getCarType() {
+        return carisBig;
     }
 
-    public void setCarType(String carType) {
-        this.carType = carType;
+    public void setCarType(boolean carType) {
+        this.carisBig = carType;
     }
 
     @Override
     public String toString() {
         return "Car{" +
                 "carNum=" + carNum +
-                ", carType='" + carType + '\'' +
+                ", carisBig='" + carisBig + '\'' +
                 '}';
     }
 }
