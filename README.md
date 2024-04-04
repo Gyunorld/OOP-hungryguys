@@ -30,5 +30,5 @@
 1. 프로젝트 클론
 
 ```bash
-git clone https://github.com/주차장-시스템/repository.git
+git clone https://github.com/kevin0591/OOP-hungryguys.git
 ```
