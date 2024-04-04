@@ -49,5 +49,4 @@ public class MainMenu {
     public static void textTail() {
         System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
-
 }
