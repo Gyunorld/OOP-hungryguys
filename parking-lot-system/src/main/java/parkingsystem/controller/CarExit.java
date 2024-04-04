@@ -28,30 +28,24 @@ public class CarExit {
     }
 
 
-    public String vehicleOut() {
-
-        Scanner sc = new Scanner(System.in);
-        int PlateNum = sc.nextInt();
+    public String vehicleOut(int plateNum) {
 
         ArrayList<ParkingSpace> pg  = parkingLot.getParkingLot();
         ArrayList<ParkingSpace> pt  = parkingLot.getParkingTower();
 
 
         for (int i = 0; i < pg.size(); i++){
-            if (PlateNum == pg.get(i).getParkedCar().getCarNum()) {
+            if (plateNum == pg.get(i).getParkedCar().getCarNum()) {
                 pg.get(i).setParkedCar(null);
-                return "lot";
+                return "일반주차장-" + pg.get(i).getSpaceNum();
             }
         }
         for (int i = 0; i < pt.size(); i++){
-            if (PlateNum == pg.get(i).getParkedCar().getCarNum()) {
+            if (plateNum == pg.get(i).getParkedCar().getCarNum()) {
                 pt.get(i).setParkedCar(null);
-                return "tower";
+                return "주차타워-" + pt.get(i).getSpaceNum();
             }
-
         }
-
         return "fail";
     }
-
 }

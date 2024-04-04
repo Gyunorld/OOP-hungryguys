@@ -31,8 +31,10 @@ public class MainMenu {
                     controller.entry();
                     break;
                 case 2:
+                    carExit();
                     break;
                 case 3:
+                    whereisMyCar();
                     break;
                 case 0:
                     return;
@@ -48,5 +50,26 @@ public class MainMenu {
 
     public static void textTail() {
         System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+    }
+
+    public void carExit() {
+        System.out.print("주차하신 차량 번호를 입력해주세요 : ");
+        int carNum = sc.nextInt();
+        String result = controller.exit(carNum);
+        if(result.equals("fail")) {
+            System.out.println("입력하신 차량번호에 맞는 차량이 주차장에 없습니다!");
+        } else {
+            System.out.println("(차량 번호 : " + carNum + " , 주차 위치 : " + result + ") 출차 되었습니다!" );
+        }
+    }
+    public void whereisMyCar() {
+        System.out.print("주차하신 차량 번호를 입력해주세요 : ");
+        int carNum = sc.nextInt();
+        String result = controller.whereIsMyCar(carNum);
+        if(result.equals("X")) {
+            System.out.println("입력하신 차량번호에 맞는 차량이 주차장에 없습니다!");
+        } else {
+            System.out.println("입력하신 차량번호에 맞는 차량은 " + result + " 에 있습니다.");
+        }
     }
 }
