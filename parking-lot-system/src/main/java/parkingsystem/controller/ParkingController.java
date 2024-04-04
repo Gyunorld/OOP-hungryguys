@@ -11,20 +11,16 @@ public class ParkingController {
     CarEntry carEntry = new CarEntry(pl);
     CarExit carExit = new CarExit(pl);
 
-    // 입차, 출차
+    // CarEntry 호출
     public void entry() {
-        carEntry.parkVehicle();
-        for(ParkingSpace i : pl.getParkingLot()){
-            System.out.println(i);
-        }
-        System.out.println("----------------------------");
-        for(ParkingSpace i : pl.getParkingTower()) {
-            System.out.println(i);
-        }
+        carEntry.entry();
+        carEntry.parkCar(carEntry.inputCarInfo());
     }
 
+    // 출차
     public void exit(ParkingLot space, Car car) {
         new CarExit();
     }
+
 
 }

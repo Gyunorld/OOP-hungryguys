@@ -9,59 +9,63 @@ import java.util.Scanner;
 
 public class CarEntry {
     /*
-    입차 메소드, 컨트롤러에 생성된 parking space를 인자로 받아서 처리..?
-
-    이하 추형진.
-    1. 사용자로부터 차량 정보(번호, isBig 등)를 입력받기.
-    2. 입력받은 차량 정보를 바탕으로 Car 객체를 생성.
-    3. 차종이 대형이냐 소형이냐에 따라 일반 주차장인지 주차타워인지 결정.
-    4. 주차 가능한 공간이 있는지 확인.
-    5. ParkingLot과 ParkingTower 클래스의 getAvailableSpots() 메서드를 사용 -> 주차 가능한 공간이 있다면, 해당 공간에 차량 정보를 할당.
+    1. 입차 버튼을 눌렀을 때 각 주차장에 입차 가능한 대수를 출력해주기.
+    2. 사용자로부터 차량 정보(차량번호, carisBig 등)를 입력받기.
+    3. 입력받은 차의 번호와 차종(대형, 소형)을 입력받아서 대형차는 ParkingLot메소드에 일반주차장인 parkingLot에, 소형차는 주차타워인 ParkingTower에 주차하기.
+    4. 각 주차장에 주차되었다면 마지막에 어느주차장에 어느칸에 주차되었는지 위치를 출력해주기.
      */
-    public static final int LARGE_CAR = 1;
-    public static final int COMPACT_CAR = 2;
     private ParkingLot parkingLot;
+    private ArrayList<ParkingSpace> parkingLotList;
+    private ArrayList<ParkingSpace> parkingTowerList;
+    private Scanner sc = new Scanner(System.in);
 
-    public CarEntry() {
+    public CarEntry(ParkingLot parkingLot) { // 생성자
+        this.parkingLot = parkingLot; // ParkingLot 객체를 생성자로 받아서 초기화
+        this.parkingLotList = parkingLot.getParkingLot(); // ParkingLot 객체의 parkingLot 필드를 초기화
+        this.parkingTowerList = parkingLot.getParkingTower(); // ParkingLot 객체의 parkingTower 필드를 초기화
     }
 
-    public CarEntry(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+    // 1. 입차 버튼을 눌렀을 때 각 주차장에 입차 가능한 대수를 출력해주기.
+    public void entry() {
+        System.out.println("입차 가능한 주차장 대수 : " + parkingLotList.size());
+        System.out.println("입차 가능한 주차타워 대수 : " + parkingTowerList.size());
     }
 
-    public void parkVehicle() {
-        Scanner sc = new Scanner(System.in);
+    // 2. 사용자로부터 차량 정보(차량번호, carisBig 등)를 입력받기.
+    public Car inputCarInfo() {
+        System.out.print("차량번호 : ");
+        int carNum = sc.nextInt();
+        System.out.print("차종(대형차 : 1, 소형차 : 2) : ");
+        int carSize = sc.nextInt();
 
-        //1. 사용자로부터 차량 정보(번호, isBig 등)를 입력받기.
-        System.out.println("차량 번호를 입력하세요: ");
-        int PlateNum = sc.nextInt();
-        System.out.print("차량 종류를 입력하세요 (1: 대형, 2: 소형): ");
-        int vehicleType = sc.nextInt();
+        return new Car(carNum, carSize == 1);
+    }
 
-        //2. 입력받은 차량 정보를 바탕으로 Car 객체를 생성.
-        Car car = new Car(PlateNum, vehicleType == LARGE_CAR); // 차량 객체 생성
-
-        //3. 차종이 대형이냐 소형이냐에 따라 일반 주차장인지 주차타워인지 결정.
-        boolean isCompact = vehicleType == COMPACT_CAR; // 소형 차량인지 확인
-        ArrayList<ParkingSpace> parkingSpaces = isCompact ? parkingLot.getParkingTower() : parkingLot.getParkingLot(); // 주차장 객체 생성
-
-        //4. 주차 가능한 공간이 있는지 확인.
-        ParkingSpace availableSpace = null; // 주차 가능한 공간이 없다면 null
-        for (ParkingSpace space : parkingSpaces) { // 주차장 객체를 순회하며 주차 가능한 공간이 있는지 확인
-            if (space.getParkedCar() == null && (!isCompact || space.isAvailable())) { //  코드 해석 : 주차된 차량이 없고, 주차공간이 있으면
-                availableSpace = space; // 해당 공간에 주차
-                break;
+    // 3. 입력받은 차의 번호와 차종(대형, 소형)을 입력받아서 대형차는 ParkingLot메소드에 일반주차장인 parkingLot에, 소형차는 주차타워인 ParkingTower에 주차하기.
+    public void parkCar(Car car) { // 호출이 안되는 이유는? -> ParkingController에서 CarEntry를 호출하지 않았기 때문 -> 호출 했는데? -> entry() 메소드만 호출했음
+        if (car.isCarisBig()) { // 대형차라면
+            for (ParkingSpace space : parkingLotList) { // 일반주차장에 주차
+                if (space.isCheckSpace()) { // 주차공간이 비어있다면
+                    parkVehicle(car, space); // 주차
+                    System.out.println("일반주차장에 주차되었습니다. 주차칸 : " + space.getSpaceNum()); // 주차된 주차칸 출력
+                    return;
+                }
+            }
+        } else { // 소형차라면
+            for (ParkingSpace space : parkingTowerList) { // 주차타워에 주차
+                if (space.isCheckSpace()) { // 주차공간이 비어있다면
+                    parkVehicle(car, space); // 주차
+                    System.out.println("주차타워에 주차되었습니다. 주차칸 : " + space.getSpaceNum()); // 주차된 주차칸 출력
+                    return;
+                }
             }
         }
-
-        //5. ParkingLot과 ParkingTower 클래스의 getAvailableSpots() 메서드를 사용 -> 주차 가능한 공간이 있다면, 해당 공간에 차량 정보를 할당.
-        if (availableSpace != null) { // 주차 가능한 공간이 있다면, 해당 공간에 차량 정보를 할당
-            availableSpace.setParkedCar(car);
-            System.out.println("주차 완료");
-            System.out.println("주차 위치: " + availableSpace.getSpaceNum());
-        } else {
-            System.out.println("주차 가능한 공간이 없습니다.");
-        }
-
+        System.out.println("주차장이 가득 찼습니다."); // 주차장이 가득 찼다면 출력
     }
+
+    //    4. 각 주차장에 주차되었다면 마지막에 어느주차장에 어느칸에 주차되었는지 위치를 출력해주기.
+    public void parkVehicle(Car car, ParkingSpace space) {
+        space.setParkedCar(car);
+    }
+
 }

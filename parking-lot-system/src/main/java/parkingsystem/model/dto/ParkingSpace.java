@@ -47,4 +47,7 @@ public class ParkingSpace {
                 ", isAvailable=" + isAvailable +
                 '}';
     }
+    public boolean isCheckSpace() { // 주차 가능한지 확인하는 부분
+        return isAvailable && parkedCar == null;
+    }
 }
