@@ -28,9 +28,9 @@ public class CarExit {
     }
 
 
-    public void vehicleOut() {
+    public String vehicleOut() {
+
         Scanner sc = new Scanner(System.in);
-        System.out.println("출차할 차량 번호를 입력하세요: ");
         int PlateNum = sc.nextInt();
 
         ArrayList<ParkingSpace> pg  = parkingLot.getParkingLot();
@@ -40,16 +40,18 @@ public class CarExit {
         for (int i = 0; i < pg.size(); i++){
             if (PlateNum == pg.get(i).getParkedCar().getCarNum()) {
                 pg.get(i).setParkedCar(null);
+                return "lot";
             }
         }
         for (int i = 0; i < pt.size(); i++){
             if (PlateNum == pg.get(i).getParkedCar().getCarNum()) {
                 pt.get(i).setParkedCar(null);
-            } else {
-                System.out.println("해당 차량은 없습니다.");
+                return "tower";
             }
+
         }
 
+        return "fail";
     }
 
 }
