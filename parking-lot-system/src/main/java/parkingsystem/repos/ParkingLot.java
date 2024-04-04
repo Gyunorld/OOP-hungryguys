@@ -46,7 +46,21 @@ public class ParkingLot {
 //        return cnt;
 //    }
 //
-//    // 3. 차량번호 조회
-
+//    // 3. 차량번호
+    /*
+     * find my car
+     * */
+    public String whereIsMyCar(int carNumber) {
+        for (ParkingSpace parkingSpace : parkingLot) {
+            if (parkingSpace.getSpaceNum() == carNumber) {
+                return "일반주차장-" + parkingSpace.getSpaceNum();
+            }
+        }
+        for (ParkingSpace parkingSpace : parkingTower) {
+            if (parkingSpace.getSpaceNum() == carNumber) {
+                return "주차타워-" + parkingSpace.getSpaceNum();
+            }
+        }
+        return "X";
+    }
 }
-

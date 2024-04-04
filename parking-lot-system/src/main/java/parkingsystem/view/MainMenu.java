@@ -17,5 +17,4 @@ public class MainMenu {
         // tower
         ArrayList<ParkingSpace> parkingTower = controller.pl.getParkingTower();
     }
-
 }
