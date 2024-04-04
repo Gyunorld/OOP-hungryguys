@@ -21,11 +21,11 @@ public class ParkingController {
     public String exit(int carNum) {
         String result = carExit.vehicleOut(carNum);
 
-        for(ParkingSpace i : pl.getParkingLot()){
+        for (ParkingSpace i : pl.getParkingLot()) {
             System.out.println(i);
         }
         System.out.println("----------------------------");
-        for(ParkingSpace i : pl.getParkingTower()) {
+        for (ParkingSpace i : pl.getParkingTower()) {
             System.out.println(i);
         }
         return result;
@@ -34,12 +34,12 @@ public class ParkingController {
     public String whereIsMyCar(int carNumber) {
 
         for (ParkingSpace parkingSpace : pl.getParkingLot()) {
-            if (parkingSpace.getParkedCar().getCarNum() == carNumber) {
+            if (parkingSpace.getParkedCar() != null && parkingSpace.getParkedCar().getCarNum() == carNumber) {
                 return "일반주차장-" + parkingSpace.getSpaceNum();
             }
         }
         for (ParkingSpace parkingSpace : pl.getParkingTower()) {
-            if (parkingSpace.getParkedCar().getCarNum() == carNumber) {
+            if (parkingSpace.getParkedCar() != null && (parkingSpace.getParkedCar().getCarNum() == carNumber)) {
                 return "주차타워-" + parkingSpace.getSpaceNum();
             }
         }

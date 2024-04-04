@@ -27,8 +27,8 @@ public class CarEntry {
 
     // 1. 입차 버튼을 눌렀을 때 각 주차장에 입차 가능한 대수를 출력해주기.
     public void entry() {
-        System.out.println("입차 가능한 주차장 대수 : " + parkingLotList.size());
-        System.out.println("입차 가능한 주차타워 대수 : " + parkingTowerList.size());
+        System.out.println("입차 가능한 주차장 대수 : " + (parkingLotList.size()- ParkingLot.lotCount));
+        System.out.println("입차 가능한 주차타워 대수 : " + (parkingTowerList.size()-ParkingLot.towerCount));
     }
 
     // 2. 사용자로부터 차량 정보(차량번호, carisBig 등)를 입력받기.
@@ -42,21 +42,48 @@ public class CarEntry {
     }
 
     // 3. 입력받은 차의 번호와 차종(대형, 소형)을 입력받아서 대형차는 ParkingLot메소드에 일반주차장인 parkingLot에, 소형차는 주차타워인 ParkingTower에 주차하기.
-    public void parkCar(Car car) { // 호출이 안되는 이유는? -> ParkingController에서 CarEntry를 호출하지 않았기 때문 -> 호출 했는데? -> entry() 메소드만 호출했음
+    public void parkCar(
+            Car car) { // 호출이 안되는 이유는? -> ParkingController에서 CarEntry를 호출하지 않았기 때문 -> 호출 했는데? -> entry() 메소드만 호출했음
+
+        for (ParkingSpace space : parkingLotList) {
+            if (space.getParkedCar() == null) {
+                continue;
+            } if (space.getParkedCar().getCarNum() == car.getCarNum()){
+                System.out.println("이미 주차된 차량입니다.");
+                return;
+            }
+        }
+        for (ParkingSpace space : parkingTowerList) {
+            if (space.getParkedCar() == null) {
+                continue;
+            } if (space.getParkedCar().getCarNum() == car.getCarNum()){
+                System.out.println("이미 주차된 차량입니다.");
+                return;
+            }
+        }
+
+
         if (car.isCarisBig()) { // 대형차라면
             for (ParkingSpace space : parkingLotList) { // 일반주차장에 주차
-                if (space.isCheckSpace()) { // 주차공간이 비어있다면
+                if (space.isCheckLotSpace()) { // 주차공간이 비어있다면
                     parkVehicle(car, space); // 주차
+                    parkingLot.lotCount++;
+
                     System.out.println("일반주차장에 주차되었습니다. 주차칸 : " + space.getSpaceNum()); // 주차된 주차칸 출력
                     return;
                 }
             }
         } else { // 소형차라면
             for (ParkingSpace space : parkingTowerList) { // 주차타워에 주차
-                if (space.isCheckSpace()) { // 주차공간이 비어있다면
+
+                if (space.isCheckTowerSpace()) { // 주차공간이 비어있다면
                     parkVehicle(car, space); // 주차
                     System.out.println("주차타워에 주차되었습니다. 주차칸 : " + space.getSpaceNum()); // 주차된 주차칸 출력
+                    parkingLot.towerCount++;
                     return;
+                }
+                if (space.getParkedCar().getCarNum() == car.getCarNum()) {
+                    System.out.println("이미 존재하는 차량입니다.");
                 }
             }
         }
