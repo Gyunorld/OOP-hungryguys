@@ -52,12 +52,12 @@ public class ParkingLot {
      * */
     public String whereIsMyCar(int carNumber) {
         for (ParkingSpace parkingSpace : parkingLot) {
-            if (parkingSpace.getSpaceNum() == carNumber) {
+            if (parkingSpace.getParkedCar().getCarNum() == carNumber) {
                 return "일반주차장-" + parkingSpace.getSpaceNum();
             }
         }
         for (ParkingSpace parkingSpace : parkingTower) {
-            if (parkingSpace.getSpaceNum() == carNumber) {
+            if (parkingSpace.getParkedCar().getCarNum() == carNumber) {
                 return "주차타워-" + parkingSpace.getSpaceNum();
             }
         }
