@@ -15,37 +15,47 @@ public class MainMenu {
 
 
         while (true) {
+            try {
+                textHead();
+                printParkingLot();
+                System.out.print("""                
+                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                   
+                                         1. 입차
+                                         2. 출차
+                                     3. 주자 위치 조회
+                                         0. 종료
+                        """);
+                textTail();
 
-            textHead();
-            printParkingLot();
-            System.out.print("""                
-                    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                   
-                                     1. 입차
-                                     2. 출차
-                                 3. 주자 위치 조회
-                                     0. 종료
-                    """);
-            textTail();
-
-            System.out.print(">> 입력 : ");
-            int operator = sc.nextInt();
+                System.out.print(">> 입력 : ");
+                int operator = sc.nextInt();
 
 
-            switch (operator) {
-                case 1:
-                    controller.entry();
-                    break;
-                case 2:
-                    carExit();
-                    break;
-                case 3:
-                    whereisMyCar();
-                    break;
-                case 0:
-                    System.out.println("프로그램을 종료합니다...");
-                    return;
-                default:
+                switch (operator) {
+                    case 1:
+                        controller.entry();
+                        break;
+                    case 2:
+                        carExit();
+                        break;
+                    case 3:
+                        whereisMyCar();
+                        break;
+                    case 0:
+                        System.out.println("프로그램을 종료합니다...");
+                        return;
+                    default:
+                        System.out.println("잘못 입력하셨습니다! 다시 입력해주세요.");
+                        Thread.sleep(800);
+                }
+            } catch (Exception e) {
+                try {
                     System.out.println("잘못 입력하셨습니다! 다시 입력해주세요.");
+                    Thread.sleep(800);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                sc.nextLine();
             }
         }
     }
@@ -94,7 +104,7 @@ public class MainMenu {
             String leftLine = i < leftSpace.length ? leftSpace[i] : "";
             String rightLine = i < rightSpace.length ? rightSpace[i] : "";
 
-            if(i == 0)
+            if (i == 0)
                 System.out.printf("   %s%" + numSpaces1 + "s%s%n", leftLine, "", rightLine);
             else
                 System.out.printf("   %s%" + numSpaces2 + "s%s%n", leftLine, "", rightLine);
@@ -116,7 +126,7 @@ public class MainMenu {
                 if (i % 2 == 0) ui += "[" + (i + 1) + "]" + "\uD83D\uDE9A";
                 else ui += "\uD83D\uDE9A" + "[" + (i + 1) + "]";
             }
-            if(i % 2 != 0 && i < 9) ui += " ";
+            if (i % 2 != 0 && i < 9) ui += " ";
         }
         return ui;
     }
