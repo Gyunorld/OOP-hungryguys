@@ -5,9 +5,13 @@ import parkingsystem.model.dto.ParkingSpace;
 import java.util.ArrayList;
 
 public class ParkingLot {
+    public static int lotCount;
+    public static int towerCount;
 
     private ArrayList<ParkingSpace> parkingLot = null;
     private ArrayList<ParkingSpace> parkingTower = null;
+
+
 
     public ParkingLot(int parkNum, int towerNum) {
 
