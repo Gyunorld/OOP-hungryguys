@@ -33,12 +33,24 @@ public class CarEntry {
 
     // 2. 사용자로부터 차량 정보(차량번호, carisBig 등)를 입력받기.
     public Car inputCarInfo() {
-        System.out.print("차량번호 : ");
-        int carNum = sc.nextInt();
-        System.out.print("차종(대형차 : 1, 소형차 : 2) : ");
-        int carSize = sc.nextInt();
 
-        return new Car(carNum, carSize == 1);
+            System.out.print("차량번호 : ");
+            int carNum = sc.nextInt();
+
+        while(true) {
+            System.out.print("차종(대형차 : 1, 소형차 : 2) : ");
+            int carSize = sc.nextInt();
+
+            switch (carSize) {
+                case 1:
+                    return new Car(carNum, true);
+                case 2:
+                    return new Car(carNum, false);
+                default:
+                    System.out.println("차종을 잘못 입력했습니다. 다시 입력해주세요.");
+                    continue;
+            }
+        }
     }
 
     // 3. 입력받은 차의 번호와 차종(대형, 소형)을 입력받아서 대형차는 ParkingLot메소드에 일반주차장인 parkingLot에, 소형차는 주차타워인 ParkingTower에 주차하기.
