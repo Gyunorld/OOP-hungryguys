@@ -14,8 +14,9 @@ public class MainMenu {
 
         while(true) {
             textHead();
-            System.out.println("""
-                                    
+            printParkingLot();
+            System.out.print("""                
+                    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                   
                                      1. 입차
                                      2. 출차
                                  3. 주자 위치 조회
@@ -37,6 +38,7 @@ public class MainMenu {
                     whereisMyCar();
                     break;
                 case 0:
+                    System.out.println("프로그램을 종료합니다...");
                     return;
                 default:
                     System.out.println("잘못 입력하셨습니다! 다시 입력해주세요.");
@@ -71,5 +73,53 @@ public class MainMenu {
         } else {
             System.out.println("입력하신 차량번호에 맞는 차량은 " + result + " 에 있습니다.");
         }
+    }
+
+    public void printParkingLot() {
+        String[] leftSpace = parkingLotUI().split("\n");
+        String[] rightSpace = parkingTowerUI().split("\n");
+        int maxLength = Math.max(leftSpace.length, rightSpace.length);
+        int numSpaces = 10;
+
+        for (int i = 0; i < maxLength; i++) {
+
+            String leftLine = i < leftSpace.length ? leftSpace[i] : "";
+            String rightLine = i < rightSpace.length ? rightSpace[i] : "";
+
+            System.out.printf("   %s%" + numSpaces + "s%s%n", leftLine, "", rightLine);
+        }
+    }
+
+    public String parkingLotUI() {
+        String ui = "[ParkingLot]\n";
+        ArrayList<ParkingSpace> parkingLot = controller.pl.getParkingLot();
+
+        for (int i = 0; i < parkingLot.size(); i++) {
+
+            if(i % 2 == 0 && i != 0) ui += "\n";
+
+            if(parkingLot.get(i).getParkedCar() == null)
+                ui += "["+ (i + 1) + "]" + "\uD83D\uDFE9";
+            else
+                ui += "["+ (i + 1) + "]" + "\uD83D\uDE99";
+
+            if(i != 8) ui += "   ";
+            else ui += "  ";
+        }
+        return ui;
+    }
+    public String parkingTowerUI() {
+        String ui = "[ParkingTower]\n";
+        ArrayList<ParkingSpace> parkingTower = controller.pl.getParkingTower();
+
+        for (int i = parkingTower.size() - 1; i >= 0; i--) {
+            if(parkingTower.get(i).getParkedCar() == null)
+
+                ui += "["+ (i + 1) + "]" + "\uD83D\uDFE9" + "\n";
+            else
+                ui += "["+ (i + 1) + "]" + "\uD83D\uDE99" + "\n";
+
+        }
+        return ui;
     }
 }
