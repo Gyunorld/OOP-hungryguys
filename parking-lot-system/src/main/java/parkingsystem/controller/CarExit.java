@@ -46,10 +46,10 @@ public class CarExit {
             }
         }
         for (int i = 0; i < pt.size(); i++){
-            if (pg.get(i).getParkedCar()==null){
+            if (pt.get(i).getParkedCar()==null){
                 continue;
             }
-            if (plateNum == pg.get(i).getParkedCar().getCarNum()) {
+            if (plateNum == pt.get(i).getParkedCar().getCarNum()) {
                 pt.get(i).setParkedCar(null);
                 ParkingLot.towerCount--;
                 return "주차타워-" + pt.get(i).getSpaceNum();

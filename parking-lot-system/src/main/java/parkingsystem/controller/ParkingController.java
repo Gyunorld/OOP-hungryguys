@@ -21,13 +21,13 @@ public class ParkingController {
     public String exit(int carNum) {
         String result = carExit.vehicleOut(carNum);
 
-        for (ParkingSpace i : pl.getParkingLot()) {
-            System.out.println(i);
-        }
-        System.out.println("----------------------------");
-        for (ParkingSpace i : pl.getParkingTower()) {
-            System.out.println(i);
-        }
+//        for (ParkingSpace i : pl.getParkingLot()) {
+//            System.out.println(i);
+//        }
+//        System.out.println("----------------------------");
+//        for (ParkingSpace i : pl.getParkingTower()) {
+//            System.out.println(i);
+//        }
         return result;
     }
 
